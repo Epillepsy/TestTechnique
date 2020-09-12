@@ -12,6 +12,7 @@
     <ElCol
       v-if="showContent"
       :span="layoutColValues.content.span"
+      :offset="layoutColValues.content.offset"
     >
       <span ref="content">
         <RouterView
@@ -31,7 +32,7 @@ export default {
   computed: {
     layoutColValues() {
       if (this.showContent && this.showLeftPanel) {
-        return { content: { span: 16 }, leftPanel: { span: 8 } };
+        return { content: { span: 15, offset: 1 }, leftPanel: { span: 8 } };
       }
       return { content: { span: 24 }, leftPanel: { span: 24 } };
     },
