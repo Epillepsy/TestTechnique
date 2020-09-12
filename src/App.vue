@@ -1,18 +1,12 @@
 <template>
   <div class="base">
     <el-row>
-      <el-col
-        :span="22"
-        :offset="1"
-      >
+      <el-col>
         <Header />
       </el-col>
     </el-row>
     <el-row>
-      <el-col
-        :span="22"
-        :offset="1"
-      >
+      <el-col>
         <RouterView />
       </el-col>
     </el-row>
@@ -30,13 +24,15 @@ export default {
 };
 </script>
 
+  <style lang="scss" src="@/scss/main.scss"></style>
+  <style lang="css" src="@/scss/mypro-icon.css"></style>
 <style lang="scss">
+@import "@/scss/main.scss";
+
 .base {
   width: 100%;
   top: 0px;
   position: absolute;
+  background-color: $background-color
 }
 </style>
-
-<style lang="scss" src="@/scss/main.scss"></style>
-<style lang="css" src="@/scss/mypro-icon.css"></style>
