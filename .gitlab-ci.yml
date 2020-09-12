@@ -1,0 +1,63 @@
+image: node:alpine
+
+# first, install Cypress, then run all tests (in parallel)
+stages:
+  - lint
+  # - test
+
+yarn_lint:
+  stage: lint
+  image: circleci/node:8.14.0-browsers-legacy
+  script:
+    - rm -f /tmp/.X99-lock
+    - yarn
+    - yarn lint
+  tags:
+    - docker
+
+yarn_lint_style:
+  stage: lint
+  image: circleci/node:8.14.0-browsers-legacy
+  script:
+    - rm -f /tmp/.X99-lock
+    - yarn
+    - yarn lint:style
+  tags:
+    - docker
+
+
+# yarn_test_unit:
+#   stage: test
+#   image: circleci/node:8.14.0-browsers-legacy
+#   script:
+#     - rm -f /tmp/.X99-lock
+#     - yarn
+#     - yarn test:unit
+#   tags:
+#     - docker
+
+
+# yarn_test_e2e:
+#   stage: test
+#   image: circleci/node:8.14.0-browsers-legacy
+#   script:
+#     - rm -f /tmp/.X99-lock
+#     - yarn
+#     - yarn run cypress verify
+#     - yarn test:e2e --headless --mode development
+#   tags:
+#     - docker
+#   # adding artifacts for testing
+#   artifacts:
+#     when: on_failure
+#     expire_in: '1 week'
+#     untracked: true
+#     paths:
+#       - tests/e2e/videos/**/*.mp4
+#       - tests/e2e/screenshots/**/*.png
+#   artifacts:
+#     when: on_success
+#     expire_in: '3 days'
+#     untracked: true
+#     paths:
+#       - tests/e2e/screenshots/**/*.png

@@ -1,0 +1,23 @@
+/* .browserslistrc
+  defaults
+  ie >= 11
+  not ie 10
+  not baidu >= 0
+  not Android >= 0
+  not and_chr >= 0
+  not and_qq >= 0
+  not and_uc >= 0
+  not and_ff >= 0
+  not bb >= 0
+  not op_mini >= 0
+  not op_mini all
+  not op_mob >= 0
+  not ios_saf >= 0
+  not ie_mob >= 0
+  not samsung >= 0
+*/
+module.exports = {
+  plugins: {
+    autoprefixer: {},
+  },
+};
