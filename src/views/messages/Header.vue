@@ -2,15 +2,17 @@
   <header class="header">
     <el-row>
       <el-col
-        :sm="20"
-        :xs="16"
+        :lg="21"
+        :md="18"
+        :xs="19"
       >
         <img
           :src="logo"
           class="logo"
+          :class="{mobile: isMobile}"
         >
         <span class="readIcon">
-          <i class="mypro-icon mypro-icon-mail" />
+          <i class="el-icon-message" />
           <span
             class="text"
           >
@@ -18,12 +20,15 @@
           </span>
         </span>
       </el-col>
+      <span class="vertical-separator" />
       <el-col
-        :sm="4"
-        :xs="{offset: 4, span: 4}"
+        :lg="3"
+        :md="6"
+        class="realtor"
+        :xs="5"
       >
         <img
-          class="logo realtor"
+          class="icon"
           :src="currentRealtor.logo"
         >
         <el-dropdown @command="updateCurrentRealtor">
@@ -93,26 +98,48 @@ export default {
   color: $header-color;
   line-height: 60px;
   white-space: nowrap;
+  padding: 0 0 0 10px;
 }
 
 .logo {
+  margin-top: 6px;
   vertical-align: middle;
+  & > .mobile {
+    width: 150px;
+  }
+}
+.vertical-separator {
+  height: 100%;
+  width: 1px;
+  position: absolute;
+  background-color: white;
 }
 .realtor {
-  height: 32px;
-  border-radius: 50px;
+  padding: 0px 10px;
+  background-color: $deep-blue;
+  & > .icon {
+    height: 32px;
+    border-radius: 50px;
+    vertical-align: middle;
+  }
 }
 .el-dropdown {
   color: $header-color !important;
+}
+.el-icon-message {
+  vertical-align: middle !important;
+
 }
 .readIcon {
   margin-left: 10px;
   background-color: $green;
   padding: 5px;
   border-radius: 8px;
+  vertical-align: middle;
+
   & > .text {
     margin-left: 5px;
-    font-size: 15px;
+    font-size: 12px;
   }
 }
 
