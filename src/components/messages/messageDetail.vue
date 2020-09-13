@@ -16,7 +16,7 @@
             :span="12"
             class="text-blue"
           >
-            {{ message.contact.email }}
+            <a :href="`mailto:${message.contact.email}`"> {{ message.contact.email }}</a>
           </el-col>
         </el-row>
         <el-row>
@@ -27,7 +27,7 @@
             :span="12"
             class="text-blue"
           >
-            {{ message.contact.phone }}
+            <a :href="`tel:${message.contact.phone}`"> {{ message.contact.phone }}</a>
           </el-col>
         </el-row>
       </el-col>
@@ -84,6 +84,7 @@ export default {
   padding: 20px;
   background-color: white;
   margin-bottom: 20px;
+  margin-left: 7px;
 }
 .messageBody {
   padding-bottom: 50px;
