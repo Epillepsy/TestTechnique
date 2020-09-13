@@ -112,7 +112,10 @@ export default {
 <style lang="scss">
 .list {
   overflow: auto;
-  height: 800px ! important;
+  max-height: 800px;
+  margin-bottom: 20px;
 }
-
+.down {
+  height: inherit !important;
+}
 </style>

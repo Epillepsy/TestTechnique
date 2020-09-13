@@ -9,6 +9,8 @@ yarn install
 ```
 yarn run serve
 ```
+nb: by default in local and dev mode the API URL will be localhost
+If you don't run the api locally change the url in the .env.developpement file
 
 ### Compiles and minifies for production
 ```

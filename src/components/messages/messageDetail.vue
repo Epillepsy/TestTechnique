@@ -86,7 +86,7 @@ export default {
   margin-bottom: 20px;
 }
 .messageBody {
-
+  padding-bottom: 50px;
 }
 .contactHeader {
   padding: 20px;

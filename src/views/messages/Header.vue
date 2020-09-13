@@ -15,6 +15,7 @@
         <span class="readIcon">
           <i class="el-icon-message" />
           <span
+            v-if="currentRealtor"
             class="text"
           >
             {{ currentRealtor.unread_messages }}
@@ -30,13 +31,15 @@
         :sm="5"
       >
         <img
+          v-if="currentRealtor"
           class="icon"
+
           :src="currentRealtor.logo"
         >
         <el-dropdown @command="updateCurrentRealtor">
           <span>
             <span
-              v-if="!isMobile"
+              v-if="!isMobile && currentRealtor"
               class="realtorName"
             >
               {{ currentRealtor.name }}
@@ -76,8 +79,9 @@ export default {
     })
   },
   mounted() {
-    this.getRealtors().then(() => {
-      this.updateCurrentRealtor(this.realtors[0].id);
+    this.getRealtors().then((value) => {
+      console.log(this.realtors, value);
+      this.updateCurrentRealtor(this.realtors[Object.keys(this.realtors)[0]].id);
     });
   },
   methods: {
@@ -87,7 +91,9 @@ export default {
     }),
     updateCurrentRealtor(realtorId) {
       this.getRealtor(realtorId);
-      this.$router.push({ name: 'messagesList', params: { realtorId } });
+      // Catch duplicate navigation issue
+      // https://github.com/vuejs/vue-router/issues/1668
+      this.$router.push({ name: 'messagesList', params: { realtorId } }).catch(() => {});
     }
   }
 };
