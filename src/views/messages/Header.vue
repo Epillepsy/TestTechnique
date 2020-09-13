@@ -48,7 +48,10 @@
 
           :src="currentRealtor.logo"
         >
-        <el-dropdown @command="updateCurrentRealtor">
+        <el-dropdown
+          trigger="click"
+          @command="updateCurrentRealtor"
+        >
           <span>
             <span
               v-if="!isMobile && currentRealtor"
@@ -64,7 +67,9 @@
               :key="realtor.id"
               :command="realtor.id"
             >
-              {{ realtor.name }}
+              <span :class="{'text-blue': realtor.id === currentRealtor.id}">
+                {{ realtor.name }}
+              </span>
             </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -113,6 +118,7 @@ export default {
 
 <style lang="scss">
 @import "@/scss/main.scss";
+
 
 .header {
   height: 60px;
