@@ -6,7 +6,7 @@ import stateToMutations from '@/store/helpers/stateToMutations';
 // initial state
 const messages = {
   realtors: [],
-  realtor: {},
+  realtor: null,
   messages: [],
   message: null
 };
@@ -38,13 +38,8 @@ const actions = {
       commit('SET_MESSAGE', data);
     });
   },
-  editMessage({ commit }, payload) {
-    const { body } = payload;
-    // local API doesn't accept id in the payload ???
-    delete body.id;
-    return Vue.$api.patch(`/realtors/${payload.params.realtorId}/messages/${payload.params.messageId}`, body).then(({ data }) => {
-      commit('SET_MESSAGE', data);
-    });
+  editMessage(context, payload) {
+    return Vue.$api.patch(`/realtors/${payload.params.realtorId}/messages/${payload.params.messageId}`, payload.body);
   },
 };
 
