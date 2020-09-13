@@ -1,20 +1,22 @@
 <template>
-  <infinite-scroll
-    class="list"
-    :min-distance="40"
-    @load-more="loadMessages"
-  >
-    <div
-      v-for="(message, index) in messages"
-      :key="message.id"
-      v-loading="loading"
+  <div class="list-wrapper">
+    <infinite-scroll
+      class="list"
+      :min-distance="40"
+      @load-more="loadMessages"
     >
-      <Message
-        :message="message"
-        @click="selectMessage(message, index)"
-      />
-    </div>
-  </infinite-scroll>
+      <div
+        v-for="(message, index) in messages"
+        :key="message.id"
+        v-loading="loading"
+      >
+        <Message
+          :message="message"
+          @click="selectMessage(message, index)"
+        />
+      </div>
+    </infinite-scroll>
+  </div>
 </template>
 
 <script>
@@ -110,9 +112,11 @@ export default {
 </script>
 
 <style lang="scss">
+.list-wrapper {
+  height: calc(100vh - 60px);
+}
 .list {
   overflow: auto;
-  max-height: 800px;
   margin-bottom: 20px;
 }
 .down {
