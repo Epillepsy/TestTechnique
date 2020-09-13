@@ -1,6 +1,7 @@
 <template>
   <div class="list-wrapper">
     <infinite-scroll
+      id="list"
       class="list"
       :min-distance="40"
       @load-more="loadMessages"
@@ -57,6 +58,8 @@ export default {
           this.params.page = 1;
           this.params.page_size = 5;
           this.loadData();
+          const listElem = document.getElementById('list');
+          (listElem || {}).scrollTop = 0;
         }
       },
       immediate: true
