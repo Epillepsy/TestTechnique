@@ -7,20 +7,32 @@
         :xs="19"
         :sm="19"
       >
-        <img
-          :src="logo"
-          class="logo"
-          :class="{mobile: isMobile}"
+        <el-col
+          :md="5"
+          :xs="15"
+          :sm="8"
         >
-        <span class="readIcon">
-          <i class="el-icon-message" />
-          <span
-            v-if="currentRealtor"
-            class="text"
+          <img
+            :src="logo"
+            class="logo"
+            :class="{mobile: isMobile}"
           >
-            {{ currentRealtor.unread_messages }}
+        </el-col>
+        <el-col
+          :md="1"
+          :xs="1"
+          :sm="1"
+        >
+          <span class="readIcon">
+            <i class="el-icon-message" />
+            <span
+              v-if="currentRealtor"
+              class="text"
+            >
+              {{ currentRealtor.unread_messages }}
+            </span>
           </span>
-        </span>
+        </el-col>
       </el-col>
       <span class="vertical-separator" />
       <el-col
@@ -114,6 +126,8 @@ export default {
 .logo {
   margin-top: 6px;
   vertical-align: middle;
+  max-width: 185px;
+  width: 100%;
   & > .mobile {
     width: 150px;
   }
