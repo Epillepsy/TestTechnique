@@ -32,6 +32,7 @@ export default {
 .base {
   width: 100%;
   top: 0px;
+  left: 0px;
   position: absolute;
   background-color: $background-color
 }
