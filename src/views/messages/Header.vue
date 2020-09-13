@@ -5,6 +5,7 @@
         :lg="21"
         :md="18"
         :xs="19"
+        :sm="19"
       >
         <img
           :src="logo"
@@ -26,6 +27,7 @@
         :md="6"
         class="realtor"
         :xs="5"
+        :sm="5"
       >
         <img
           class="icon"
@@ -74,7 +76,9 @@ export default {
     })
   },
   mounted() {
-    this.getRealtors();
+    this.getRealtors().then(() => {
+      this.updateCurrentRealtor(this.realtors[0].id);
+    });
   },
   methods: {
     ...mapActions({
