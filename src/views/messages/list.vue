@@ -5,13 +5,13 @@
     @load-more="loadMessages"
   >
     <div
-      v-for="message in messages"
+      v-for="(message, index) in messages"
       :key="message.id"
       v-loading="loading"
     >
       <Message
         :message="message"
-        @click="selectMessage"
+        @click="selectMessage(message, index)"
       />
     </div>
   </infinite-scroll>
@@ -46,11 +46,16 @@ export default {
   },
   watch: {
     realtor: {
-      handler() {
-        this.params.increment = false;
-        this.params.page = 1;
-        this.params.page_size = 5;
-        this.loadData();
+      handler(value, oldValue) {
+        // We don't want to reload if we just refresh
+        // the message counter
+        // old value is undefined on first load
+        if ((value || {}).id !== (oldValue || {}).id) {
+          this.params.increment = false;
+          this.params.page = 1;
+          this.params.page_size = 5;
+          this.loadData();
+        }
       },
       immediate: true
     },
@@ -63,17 +68,36 @@ export default {
   },
   methods: {
     ...mapActions({
-      getRealtorMessages: 'store/getRealtorMessages'
+      getRealtorMessages: 'store/getRealtorMessages',
+      editMessage: 'store/editMessage',
+      getRealtor: 'store/getRealtor'
     }),
     loadData() {
       this.loading = true;
-      this.getRealtorMessages({ ...this.params, id: this.realtor.id })
-        .finally(() => {
-          this.loading = false;
-        });
+      if (this.realtor) {
+        this.getRealtorMessages({ ...this.params, id: this.realtor.id })
+          .finally(() => {
+            this.loading = false;
+          });
+      }
     },
-    selectMessage(messageId) {
-      this.$router.push({ name: 'messagesDetails', params: { messageId, realtorId: this.realtor.id } }).catch(() => {});
+    selectMessage(message, index) {
+      if (!message || !this.realtor) { return; }
+      this.setMessageToRead(message, index);
+      this.$router.push({ name: 'messagesDetails', params: { messageId: message.id, realtorId: this.realtor.id } }).catch(() => {});
+    },
+    async setMessageToRead(message, index) {
+      const { realtorId } = this.$route.params;
+      if (!realtorId || message.read) { return; }
+      try {
+        const { data } = await this.editMessage({
+          body: { read: true }, params: { realtorId, messageId: message.id }
+        });
+        this.$set(this.messages, index, data);
+        this.getRealtor(realtorId);
+      } catch (e) {
+        console.log(e);
+      }
     },
     loadMessages() {
       if (this.loading) { return; }
@@ -87,7 +111,6 @@ export default {
 
 <style lang="scss">
 .list {
-  background-color: green;
   overflow: auto;
   height: 800px ! important;
 }
