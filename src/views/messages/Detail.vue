@@ -5,7 +5,7 @@
       :message="message"
     />
     <div v-else>
-      no messages
+      Aucun message selectionné
     </div>
   </div>
 </template>

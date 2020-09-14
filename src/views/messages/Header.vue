@@ -67,7 +67,7 @@
               :key="realtor.id"
               :command="realtor.id"
             >
-              <span :class="{'text-blue': realtor.id === currentRealtor.id}">
+              <span :class="{'text-blue': (realtor || {}).id === (currentRealtor || {}).id}">
                 {{ realtor.name }}
               </span>
             </el-dropdown-item>
